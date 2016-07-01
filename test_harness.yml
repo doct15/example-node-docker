@@ -33,7 +33,7 @@ bmcgehee/TestHarness-EN:
   Env:
     # Set any environment variables in this section.   
     # These are available during all phases of a deploy.
-    - PORT: "3000"
+    - PORT: "3001"
     - DISTELLI_INSTALLVIEW: "templates/notset.json"
  
   InstallTemplates:
