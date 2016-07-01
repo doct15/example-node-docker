@@ -1,0 +1,80 @@
+bmcgehee/example-node:
+  # Distelli Manifest example 
+  
+  PreBuild:     
+    # Add any build pre-requisites here
+    #- echo "---PreBuild---"
+    
+  #CommitData:
+    #- RepoType: Git   
+    #- RepoPath: .
+
+  Build:
+    #- echo "DD_USERNAME - $DISTELLI_DOCKER_USERNAME"
+    #- echo "DD_EMAIL - $DISTELLI_DOCKER_EMAIL"
+    #- echo "DD_ENDPOINT - $DISTELLI_DOCKER_ENDPOINT"
+    #- echo "DD_REPO - $DISTELLI_DOCKER_REPO"
+    
+    - ps ax | grep docker
+    - docker version
+    
+    # Enter your build steps here!  
+    - echo "---Building---"   
+    - npm install 
+    - echo "--Testing--"
+    - npm test
+    #- echo "docker login -u $DISTELLI_DOCKER_USERNAME -p $DISTELLI_DOCKER_PW -e $DISTELLI_DOCKER_EMAIL $DISTELLI_DOCKER_ENDPOINT"
+    - docker login -u "$DISTELLI_DOCKER_USERNAME" -p "$DISTELLI_DOCKER_PW" -e "$DISTELLI_DOCKER_EMAIL" $DISTELLI_DOCKER_ENDPOINT
+    #- echo "docker build --quiet=false -t $DISTELLI_DOCKER_REPO $DISTELLI_DOCKER_PATH"
+    - docker build --quiet=false -t "$DISTELLI_DOCKER_REPO" "$DISTELLI_DOCKER_PATH"
+    #- echo "docker tag $DISTELLI_DOCKER_REPO $DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
+    - docker tag "$DISTELLI_DOCKER_REPO" "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
+    #- echo "docker push $DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
+    - docker push "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
+   
+  PkgInclude:
+    - '*'
+
+  ###Below is deployment phases   
+  
+  Env:
+    # Set any environment variables in this section.   
+    # These are available during all phases of a deploy.
+    - PORT: "3000"
+    - DISTELLI_INSTALLVIEW: "templates/notset.json"
+ 
+  InstallTemplates:
+    - "views/index.jade"
+
+  PreInstall:  
+    # Use this section to install any deployment pre-requisites.
+    - echo "---PreInstall---"
+    #- echo "sudo docker login -u $DISTELLI_DOCKER_USERNAME -p $DISTELLI_DOCKER_PW -e $DISTELLI_DOCKER_EMAIL $DISTELLI_DOCKER_ENDPOINT"
+    - sudo docker login -u "$DISTELLI_DOCKER_USERNAME" -p "$DISTELLI_DOCKER_PW" -e "$DISTELLI_DOCKER_EMAIL" $DISTELLI_DOCKER_ENDPOINT
+    - echo "--Installing deploy dependencies--"
+    - echo "-Updating apt-get-"
+    - sudo apt-get -y clean
+    - sudo apt-get -y update
+    - echo "-Installing nodejs-"
+    - sudo apt-get -y install nodejs
+
+  PostInstall:
+    - echo "---PostInstall---"
+    #- which docker
+    #- sudo docker version
+    #- sudo docker help run
+
+  Exec:
+    #- nodejs app.js
+    #- sudo docker login -u "$DISTELLI_DOCKER_USERNAME" -p "$DISTELLI_DOCKER_PW" -e "$DISTELLI_DOCKER_EMAIL" "$DISTELLI_DOCKER_ENDPOINT"
+    #- which docker
+    #- sudo docker version
+    #- sudo docker help run
+    #- echo "sudo docker run $DISTELLI_DOCKER_PORTS --rm=true $DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
+    - sudo docker run $DISTELLI_DOCKER_PORTS --rm=true "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
+    
+  PostStart:
+    - publicip=$(curl -s ident.me) || true
+    - 'echo "You can validate the install by pointing your browser at http://$publicip:$PORT"'
+
+
