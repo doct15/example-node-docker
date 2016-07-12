@@ -63,7 +63,7 @@ bmcgehee/example-node-docker:
     - trap 'sudo docker stop $cid' SIGTERM
     - exec sudo docker run --name=$cid --rm=true $DISTELLI_DOCKER_PORTS  "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM" &
     - wait
-    - true
+    - "true"
     
   PostStart:
     - publicip=$(curl -s ident.me) || true
