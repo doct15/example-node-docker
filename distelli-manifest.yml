@@ -42,7 +42,7 @@ bmcgehee/example-node-docker:
     # Set any environment variables in this section.   
     # These are available during all phases of a deploy.
     - PORT: "3001"
-    - FINDPORT_LOOP_CNT: "60"
+    - FINDPORT_LOOP_CNT: "0"
     - FINDPORT_SLEEP: "2"
 
   PreInstall:  
@@ -72,6 +72,7 @@ bmcgehee/example-node-docker:
     - echo "--Checking for up service on PORT $PORT--"
     - failure=1
     - for i in `seq 1 $FINDPORT_LOOP_CNT`; do
+    -   echo "checking..."
     -   response=$(netstat -an | grep $PORT | grep "LISTEN ") | true
     -   if [ "$response" != "" ]; then
     -     echo "Got $response."
