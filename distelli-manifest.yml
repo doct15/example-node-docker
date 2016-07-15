@@ -73,7 +73,7 @@ bmcgehee/example-node-docker:
     - failure=1
     - for i in `seq 1 $FINDPORT_LOOP_CNT`; do
     -   echo "checking..."
-    -   nestat -an | grep $PORT | grep "LISTEN "
+    -   nestat -an | grep $PORT | grep "LISTEN " | true
     -   response=$(netstat -an | grep $PORT | grep "LISTEN ") | true
     -   if [ "$response" != "" ]; then
     -     echo "Got $response."
