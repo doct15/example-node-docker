@@ -75,6 +75,7 @@ bmcgehee/example-node-docker:
     -   echo "checking..."
     -   netstat -an | grep $PORT | grep "LISTEN " | true
     -   response=$(netstat -an | grep $PORT | grep "LISTEN ") | true
+    -   echo "RESPONSE: $response"
     -   if [ "$response" != "" ]; then
     -     echo "Got $response."
     -     failure=0
