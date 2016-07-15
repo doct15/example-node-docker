@@ -71,10 +71,11 @@ bmcgehee/example-node-docker:
     - echo "---PostInstall---"
     - echo "--Checking for up service on PORT $PORT--"
     - failure=1
+    - netstat -an
     - for i in `seq 1 $FINDPORT_LOOP_CNT`; do
     -   echo "checking..."
     -   netstat -an | grep $PORT | grep "LISTEN " | true
-    -   'response=$(netstat -an | grep $PORT | grep "LISTEN ") | true'
+    -   response=$(netstat -an | grep $PORT | grep "LISTEN ") | true
     -   'echo "RESPONSE: $response"'
     -   if [ "$response" != "" ]; then
     -     echo "Got $response."
@@ -83,6 +84,8 @@ bmcgehee/example-node-docker:
     -   fi
     -   sleep $FINDPORT_SLEEP
     - done
+    - echo "================"
+    - netstat -an
     - if [ "$failure" -gt 0 ]; then
     -   exit $failure
     - fi
