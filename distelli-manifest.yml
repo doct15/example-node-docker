@@ -55,7 +55,7 @@ bmcgehee/example-node-docker:
     - sudo apt-get -y clean
     - sudo apt-get -y update
     - echo "-Installing nodejs-"
-    - sudo apt-get -y install nodejs
+    - sudo apt-get -y install nodejs 
 
   PostInstall:
     - echo "---PostInstall---"
