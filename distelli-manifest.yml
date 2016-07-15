@@ -42,6 +42,8 @@ bmcgehee/example-node-docker:
     # Set any environment variables in this section.   
     # These are available during all phases of a deploy.
     - PORT: "3001"
+    - FINDPORT_LOOP_CNT: "60"
+    - FINDPORT_SLEEP: "2"
 
   PreInstall:  
     # Use this section to install any deployment pre-requisites.
@@ -66,6 +68,21 @@ bmcgehee/example-node-docker:
     - "true"
     
   PostStart:
+    - echo "---PostInstall---"
+    - echo "--Checking for up service on PORT $PORT--"
+    - failure=1
+    - for i in `seq 1 $FINDPORT_LOOP_CNT`; do
+    -   response=$(netstat -an | grep $PORT | grep "LISTEN ")
+    -   if [ "$response" != "" ]; then
+    -     echo "Got $response."
+    -     failure=0
+    -     break
+    -   fi
+    -   sleep $FINDPORT_SLEEP
+    - done
+    - if [ "$failure" -gt 0 ]; then
+    -   exit $failure
+    - fi
     - publicip=$(curl -s ident.me) || true
     - 'echo "You can validate the install by pointing your browser at http://$publicip:$PORT"'
 
