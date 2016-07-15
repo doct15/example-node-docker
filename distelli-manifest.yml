@@ -42,7 +42,7 @@ bmcgehee/example-node-docker:
     # Set any environment variables in this section.   
     # These are available during all phases of a deploy.
     - PORT: "3001"
-    - FINDPORT_LOOP_CNT: "0"
+    - FINDPORT_LOOP_CNT: "90"
     - FINDPORT_SLEEP: "2"
 
   PreInstall:  
