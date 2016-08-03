@@ -1,4 +1,4 @@
-bmcgehee/example-node-docker:
+bmcgehee2/example-node-docker:
   # Distelli Manifest example 
   
   PreBuild:     
@@ -84,10 +84,10 @@ bmcgehee/example-node-docker:
     -   sleep $FINDPORT_SLEEP
     - done
     - echo "================"
-    - netstat -an
     - if [ "$failure" -gt 0 ]; then
     -   exit $failure
     - fi
+    - echo "The service appears to be up."
     - publicip=$(curl -s ident.me) || true
     - 'echo "You can validate the install by pointing your browser at http://$publicip:$PORT"'
 
