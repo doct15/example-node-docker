@@ -1,5 +1,5 @@
 bmcgehee2/example-node-docker:
-  # Distelli Manifest example
+  # Distelli Manifest example  
   
   PreBuild:     
     # Add any build pre-requisites here
