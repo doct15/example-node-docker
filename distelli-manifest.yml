@@ -10,7 +10,7 @@ bmcgehee2/example-node-docker:
     #- RepoPath: .
 
   Build:
-    # Enter your build steps here!  
+    # Enter your build steps here!
 
     #- echo "DD_USERNAME - $DISTELLI_DOCKER_USERNAME"
     #- echo "DD_EMAIL - $DISTELLI_DOCKER_EMAIL"
