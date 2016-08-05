@@ -6,7 +6,7 @@ bmcgehee2/example-node-docker:
     #- echo "---PreBuild---"
     
   #CommitData:
-    #- RepoType: Git  
+    #- RepoType: Git
     #- RepoPath: .
 
   Build:
