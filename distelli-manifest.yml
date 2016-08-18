@@ -1,4 +1,4 @@
-bmcgehee/example-node-docker:
+bmcgehee2/example-node-docker:
   # Distelli Manifest example  
   
   PreBuild:     
