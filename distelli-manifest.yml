@@ -2,7 +2,7 @@ bmcgehee2/example-node-docker:
   # Distelli Manifest example  
   
   PreBuild:     
-    # Add any build pre-requisites here
+    # Add any build pre-requisites here 
     #- echo "---PreBuild---"
     
   #CommitData:
