@@ -17,9 +17,16 @@ bmcgehee/example-node-docker:
     #- echo "DD_ENDPOINT - $DISTELLI_DOCKER_ENDPOINT"
     #- echo "DD_REPO - $DISTELLI_DOCKER_REPO"
     
-    - echo "---Building---"   
+    # use nvm (node version manager)
+    - source ~/.nvm/nvm.sh
+    # Install node v4.4.7
+    - nvm install v4.4.7
+    # install latest npm version globlaly 
+    - npm install npm -g   
+
+    #- echo "---Building---"   
     - npm install 
-    - echo "--Testing--" 
+    #- echo "--Testing--"
     - npm test
 
     #- echo "docker login -u $DISTELLI_DOCKER_USERNAME -p $DISTELLI_DOCKER_PW -e $DISTELLI_DOCKER_EMAIL $DISTELLI_DOCKER_ENDPOINT"
