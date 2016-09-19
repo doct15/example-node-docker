@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:14.04 
 RUN apt-get update -y
 RUN sudo apt-get -y install nodejs
 COPY . /src
