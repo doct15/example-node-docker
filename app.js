@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({
 
 app.set('views', path.join(__dirname, 'views'));
 app.get('/', homeController.index, timeController.getDate);
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 app.post('/catch', function(request, response){
   var body = request.body;
