@@ -15,7 +15,7 @@ bmcgehee/example-node-docker:
     #- echo "DD_USERNAME - $DISTELLI_DOCKER_USERNAME"
     #- echo "DD_EMAIL - $DISTELLI_DOCKER_EMAIL"
     #- echo "DD_ENDPOINT - $DISTELLI_DOCKER_ENDPOINT"
-    #- echo "DD_REPO - $DISTELLI_DOCKER_REPO"
+    - echo "DD_REPO - $DISTELLI_DOCKER_REPO"
     
     # use nvm (node version manager)
     - source ~/.nvm/nvm.sh
