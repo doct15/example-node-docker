@@ -39,7 +39,7 @@ bmcgehee/example-node-docker:
     - docker tag "$DISTELLI_DOCKER_REPO" "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM" 
     - echo "--Pushing Docker Image--"
     #- echo "docker push $DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
-    - docker push "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
+    - 'docker push "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"'
    
   #PkgInclude:
   #  - '*'
@@ -107,11 +107,4 @@ bmcgehee/example-node-docker:
     - echo "The service appears to be up."
     - publicip=$(curl -s ident.me) || true
     - 'echo "You can validate the install by pointing your browser at http://$publicip:$PORT"'
-
-
-export ZDOCKER_MYSQL_USERNAME=example
-export ZDOCKER_MYSQL_PASSWORD=password
-export ZDOCKER_DOCKERFILE="."
-export DOCKER_ENV_PREFIX=ZDOCKER_
-export ZDOCKER_TEST="Testing"
 
