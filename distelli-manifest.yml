@@ -75,6 +75,9 @@ bmcgehee/example-node-docker1:
     - echo "---PostInstall---"
 
   Exec:
+    - for i in $(set | grep "$DOCKER_ENV_PREFIX"); do
+    -   echo "$i"
+    - done
     - cid=$(uuidgen)
     - trap 'sudo docker stop $cid' SIGTERM
     - (sudo docker run --name=$cid --rm=true $DISTELLI_DOCKER_PORTS  "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM") &
@@ -105,4 +108,10 @@ bmcgehee/example-node-docker1:
     - publicip=$(curl -s ident.me) || true
     - 'echo "You can validate the install by pointing your browser at http://$publicip:$PORT"'
 
+
+export ZDOCKER_MYSQL_USERNAME=example
+export ZDOCKER_MYSQL_PASSWORD=password
+export ZDOCKER_DOCKERFILE="."
+export DOCKER_ENV_PREFIX=ZDOCKER_
+export ZDOCKER_TEST="Testing"
 
