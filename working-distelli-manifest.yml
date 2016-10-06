@@ -5,9 +5,19 @@ bmcgehee/example-node-docker:
     # Add any build pre-requisites here 
     #- echo "---PreBuild---"
     
+  #CommitData:
+    #- RepoType: Git
+    #- RepoPath: .
+
   Build:
     # Enter your build steps here!
 
+    #- echo "DD_USERNAME - $DISTELLI_DOCKER_USERNAME"
+    #- echo "DD_EMAIL - $DISTELLI_DOCKER_EMAIL"
+    #- echo "DD_ENDPOINT - $DISTELLI_DOCKER_ENDPOINT"
+    - echo "DD_REPO - $DISTELLI_DOCKER_REPO"
+    - echo "DD_REPO - $DISTELLI_DOCKER_REPO"    
+    
     # use nvm (node version manager)
     - source ~/.nvm/nvm.sh
     # Install node v4.4.7
@@ -20,11 +30,15 @@ bmcgehee/example-node-docker:
     #- echo "--Testing--"
     - npm test
 
+    #- echo "docker login -u $DISTELLI_DOCKER_USERNAME -p $DISTELLI_DOCKER_PW -e $DISTELLI_DOCKER_EMAIL $DISTELLI_DOCKER_ENDPOINT"
     - echo "--Creating Docker Image--"
     - docker login -u "$DISTELLI_DOCKER_USERNAME" -p "$DISTELLI_DOCKER_PW" -e "$DISTELLI_DOCKER_EMAIL" $DISTELLI_DOCKER_ENDPOINT
+    #- echo "docker build --quiet=false -t $DISTELLI_DOCKER_REPO $DISTELLI_DOCKER_PATH"
     - docker build --quiet=false -t "$DISTELLI_DOCKER_REPO" "$DISTELLI_DOCKER_PATH"
+    #- echo "docker tag $DISTELLI_DOCKER_REPO $DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
     - docker tag "$DISTELLI_DOCKER_REPO" "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM" 
     - echo "--Pushing Docker Image--"
+    #- echo "docker push $DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
     - 'docker push "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"'
    
   #PkgInclude:
@@ -42,6 +56,13 @@ bmcgehee/example-node-docker:
   PreInstall:  
     # Use this section to install any deployment pre-requisites.
     - echo "---PreInstall---"
+    
+    - echo "DD_USERNAME - $DISTELLI_DOCKER_USERNAME"
+    - echo "DD_EMAIL - $DISTELLI_DOCKER_EMAIL"
+    - echo "DD_ENDPOINT - $DISTELLI_DOCKER_ENDPOINT"
+    - echo "DD_REPO - $DISTELLI_DOCKER_REPO"
+
+    #- echo "sudo docker login -u $DISTELLI_DOCKER_USERNAME -p $DISTELLI_DOCKER_PW -e $DISTELLI_DOCKER_EMAIL $DISTELLI_DOCKER_ENDPOINT"
     - sudo docker login -u "$DISTELLI_DOCKER_USERNAME" -p "$DISTELLI_DOCKER_PW" -e "$DISTELLI_DOCKER_EMAIL" $DISTELLI_DOCKER_ENDPOINT
     - echo "--Installing deploy dependencies--"
     - echo "-Updating apt-get-"
@@ -54,21 +75,21 @@ bmcgehee/example-node-docker:
     - echo "---PostInstall---"
 
   Exec:
-    #- DOCKER_ENV_STRING=""
-    #- TEMP_PREFIX_LENGTH="${#DOCKER_ENV_PREFIX}"
+    - DOCKER_ENV_STRING=""
+    - TEMP_PREFIX_LENGTH="${#DOCKER_ENV_PREFIX}"
 
-    #- for i in $(set | grep "$DOCKER_ENV_PREFIX"); do
-    #-   if [ ${i:0:2} != "_=" ] && [ ${i:0:18} != "DOCKER_ENV_PREFIX=" ]; then
-    #-     TEMP_ENV_VAR_LENGTH=${#i}
-    #-     TEMP_ENV_VAR=${i:$TEMP_PREFIX_LENGTH:($TEMP_ENV_VAR_LENGTH - $TEMP_PREFIX_LENGTH)}
-    #-     DOCKER_ENV_STRING+="-e $TEMP_ENV_VAR "
-    #-   fi
-    #- done
-    - echo "docker run $DOCKER_ENVS"
+    - for i in $(set | grep "$DOCKER_ENV_PREFIX"); do
+    -   if [ ${i:0:2} != "_=" ] && [ ${i:0:18} != "DOCKER_ENV_PREFIX=" ]; then
+    -     TEMP_ENV_VAR_LENGTH=${#i}
+    -     TEMP_ENV_VAR=${i:$TEMP_PREFIX_LENGTH:($TEMP_ENV_VAR_LENGTH - $TEMP_PREFIX_LENGTH)}
+    -     DOCKER_ENV_STRING+="-e $TEMP_ENV_VAR "
+    -   fi
+    - done
+    - echo "docker run $DOCKER_ENV_STRING"    
     
     - cid=$(uuidgen)
     - trap 'sudo docker stop $cid' SIGTERM
-    - (sudo docker run --name=$cid $DOCKER_ENVS --rm=true $DISTELLI_DOCKER_PORTS  "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM") &
+    - (sudo docker run --name=$cid $DOCKER_ENV_STRING --rm=true $DISTELLI_DOCKER_PORTS  "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM") &
     - wait
     - "true"
     
