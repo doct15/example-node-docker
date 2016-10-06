@@ -64,8 +64,9 @@ bmcgehee/example-node-docker:
     #-     DOCKER_ENV_STRING+="-e $TEMP_ENV_VAR "
     #-   fi
     #- done
+    - export MYSQL_USERNAME
     - echo "docker run $DOCKER_ENVS"
-    - echo "MYSQL_USERNAME= $MYSQL_USERNAME"
+    - echo "MYSQL_USERNAME=$MYSQL_USERNAME"
     
     - cid=$(uuidgen)
     - trap 'sudo docker stop $cid' SIGTERM
