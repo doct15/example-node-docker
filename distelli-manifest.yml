@@ -70,8 +70,8 @@ bmcgehee/example-node-docker:
     
     - cid=$(uuidgen)
     - trap 'sudo docker stop $cid' SIGTERM
-    - echo "sudo docker run --name=$cid $DOCKER_ENVS --rm=true $DISTELLI_DOCKER_PORTS  $DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
-    - (sudo docker run --name=$cid $DOCKER_ENVS --rm=true $DISTELLI_DOCKER_PORTS  "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM") &
+    - echo "sudo -E docker run --name=$cid $DOCKER_ENVS --rm=true $DISTELLI_DOCKER_PORTS  $DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
+    - (sudo -E docker run --name=$cid $DOCKER_ENVS --rm=true $DISTELLI_DOCKER_PORTS  "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM") &
    
     - wait
     - "true"
