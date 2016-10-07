@@ -65,13 +65,14 @@ bmcgehee/example-node-docker:
     #-   fi
     #- done
     #- export MYSQL_USERNAME
-    - echo "docker run $DOCKER_ENVS"
+    - echo "docker run $DISTELLI_DOCKER_ENVS"
     - echo "MYSQL_USERNAME=$MYSQL_USERNAME"
+    - sudo env
     
     - cid=$(uuidgen)
     - trap 'sudo docker stop $cid' SIGTERM
-    - echo "sudo -E docker run --name=$cid $DOCKER_ENVS --rm=true $DISTELLI_DOCKER_PORTS  $DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
-    - (sudo -E docker run --name=$cid $DOCKER_ENVS --rm=true $DISTELLI_DOCKER_PORTS  "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM") &
+    - echo "sudo -E docker run --name=$cid $DISTELLI_DOCKER_ENVS --rm=true $DISTELLI_DOCKER_PORTS  $DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
+    - (sudo -E docker run --name=$cid $DISTELLI_DOCKER_ENVS --rm=true $DISTELLI_DOCKER_PORTS  "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM") &
    
     - wait
     - "true"
