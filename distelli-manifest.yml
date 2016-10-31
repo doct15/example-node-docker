@@ -28,8 +28,8 @@ bmcgehee/example-node-docker:
     - echo "--Pushing Docker Image--"
     - 'docker push "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"'
    
-  #PkgInclude:
-  #  - '*'
+  PkgInclude:
+    - '*'
 
   ###Below is deployment phases   
   
