@@ -26,7 +26,7 @@ bmcgehee/example-node-docker:
     - docker build --quiet=false -t "$DISTELLI_DOCKER_REPO" "$DISTELLI_DOCKER_PATH"
     - docker tag "$DISTELLI_DOCKER_REPO" "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM" 
     - echo "--Pushing Docker Image--"
-    - 'docker push "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"'
+    - docker push "$DISTELLI_DOCKER_REPO:$DISTELLI_BUILDNUM"
    
   PkgInclude:
     - '*'
