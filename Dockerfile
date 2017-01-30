@@ -3,4 +3,5 @@ RUN apt-get update -y
 RUN sudo apt-get -y install nodejs
 COPY . /src
 EXPOSE 3001
+ENV test=test
 CMD ["nodejs", "/src/app.js"]

@@ -11,16 +11,16 @@ bmcgehee/example-node-docker:
     
 
     # use nvm (node version manager)
-    #- source ~/.nvm/nvm.sh
+    - source ~/.nvm/nvm.sh
     # Install node v4.4.7
-    #- nvm install v4.4.7
+    - nvm install v4.4.7
     # install latest npm version globlaly 
-    #- npm install npm -g   
+    - npm install npm -g   
 
     #- echo "---Building---"   
-    #- npm install 
+    - npm install 
     #- echo "--Testing--"
-    #- npm test
+    - npm test
 
     - echo "--Creating Docker Image--"
     - docker build --quiet=false -t "$DISTELLI_DOCKER_REPO" "$DISTELLI_DOCKER_PATH"
