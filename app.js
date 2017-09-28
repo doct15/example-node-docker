@@ -1,10 +1,11 @@
-var express = require('express');
-var app = express();
-var path = require('path');
-var bodyParser = require('body-parser');
+express = require('express');
+app = express();
+app.locals.moment = require('moment');
+path = require('path');
+bodyParser = require('body-parser');
 
-var timeController = require('./controllers/time');
-var homeController = require('./controllers/home');
+timeController = require('./controllers/time');
+homeController = require('./controllers/home');
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
