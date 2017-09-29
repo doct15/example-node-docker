@@ -8,4 +8,4 @@ COPY . /src
 EXPOSE 3001
 #CMD ["node", "/src/app.js"]
 #CMD ["bash", "-c", ".", "~/.nvm/nvm.sh", ";", "node", "/src/app.js"]
-CMD ["bash", "-c", ". ~/.nvm/nvm.sh ; nvm use v6.9.4 ; node /src/app.js"]
+CMD ["bash", "-c", ". /root/.nvm/nvm.sh ; nvm install v6.9.4 ; nvm use v6.9.4 ; node /src/app.js"]
