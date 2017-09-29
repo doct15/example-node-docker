@@ -7,4 +7,5 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh
 COPY . /src
 EXPOSE 3001
 #CMD ["node", "/src/app.js"]
-CMD ["bash", "-c", ".", "~/.nvm/nvm.sh", ";", "node", "/src/app.js"]
+#CMD ["bash", "-c", ".", "~/.nvm/nvm.sh", ";", "node", "/src/app.js"]
+CMD ["bash", "-c", ". ~/.nvm/nvm.sh ; nvm use v6.9.4 ; node /src/app.js"]
