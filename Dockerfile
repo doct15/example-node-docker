@@ -1,6 +1,6 @@
 FROM ubuntu:14.04 
 RUN apt-get update -y && \
-    apt-get -y install curl
+    apt-get -y install curl tree
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash && \
     . ~/.nvm/nvm.sh && \
     nvm install v6.9.4
