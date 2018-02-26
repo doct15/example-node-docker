@@ -13,7 +13,9 @@ bmcgehee/example-node-docker:
     # use nvm (node version manager)
     - source ~/.nvm/nvm.sh
     # Install node v4.4.7
-    - nvm install v4.4.7
+    #- nvm install v4.4.7
+    # Install node v6.9.4
+    - nvm install v6.9.4
     # install latest npm version globlaly 
     - npm install npm -g   
 
