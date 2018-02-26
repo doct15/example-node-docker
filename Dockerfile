@@ -4,7 +4,7 @@ RUN apt-get update -y && \
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash && \
     . ~/.nvm/nvm.sh && \
     nvm install v6.9.4
-RUN ls -al
+RUN ls -al 
 RUN pwd
 RUN ls -lR | true
 RUN tree
