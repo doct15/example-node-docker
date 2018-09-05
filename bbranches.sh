@@ -4,10 +4,10 @@ counter=1
 MASTER_BRANCH=master
 PR_MSG_SET="This is a test"
 
-while [ $counter -le 55 ]; do
+while [ $counter -le 88 ]; do
   #echo $counter
   DATE=$(date +"%Y%m%d%H%M%S%N")
-  UNIQUE_BRANCH="zbcd$counter"
+  UNIQUE_BRANCH="zbcdef$counter"
   echo $UNIQUE_BRANCH
   git checkout -b "$UNIQUE_BRANCH"
   touch "$UNIQUE_BRANCH"."$DATE"
